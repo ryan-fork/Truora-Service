@@ -23,7 +23,7 @@ abstract contract FiscoOracleClient {
   // internal
   function __callback(bytes32 requestId, bytes memory result) internal virtual;
 
-  // __callback with proof
+  // __callback with proof //FLAG-Ryan:
   function callback(bytes32 requestId, bytes memory result, bytes calldata proof) public onlyOracleCoreInvoke(requestId){
       __callback(requestId,result);
   }
@@ -47,6 +47,7 @@ abstract contract FiscoOracleClient {
     pendingRequests[requestId] = _oracle;
     emit Requested(requestId);
 
+    //FLAG-Ryan:
     require(oracle.query(address(this),requestCount, url,timesAmount, expiryTime,needProof, uint(returnType)),"oracle-core invoke failed!");
     requestCount++;
     reqc[msg.sender]++;

@@ -16,14 +16,14 @@ contract APISampleOracle is FiscoOracleClient {
     mapping(bytes32=>bool) private validIds;
 
     int256 public result;
-    string private url = "json(https://api.exchangerate-api.com/v4/latest/CNY).rates.JPY";
+    string private url = "json(https://api.exchangerate-api.com/v4/latest/CNY).rates.JPY"; //获取日元的汇率
 
 
     constructor(address oracleAddress) public {
         oracleCoreAddress = oracleAddress;
     }
 
-
+    //FLAG-Ryan:
     function request() public returns (bytes32)
     {
 
@@ -37,7 +37,7 @@ contract APISampleOracle is FiscoOracleClient {
     }
 
     /**
-     * Receive the response in the form of int256
+     * Receive the response in the form of int256 //FLAG-Ryan:回调
      */
     function __callback(bytes32 _requestId, bytes memory _result) internal override
     {
